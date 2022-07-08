@@ -6,7 +6,3 @@ db.transaction(function(tx){
     tx.executeSql('CREATE TABLE feira ( ID INTEGER PRIMARY KEY, item TEXT, quantidade INTEGER, valor INTEGER)')
 })
 
-function ready() {
-    document.getElementById('salvar').addEventListener('click', salvar)
-    mostrar()
-}
