@@ -118,3 +118,9 @@ body {
 .btns {
     margin-left: 0;
 }
+
+.icon {
+    color: #fff;
+    background-color: #fff;
+    width: 50px;
+}
