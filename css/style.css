@@ -85,3 +85,36 @@ body {
     font-size: 14pt;
     cursor: pointer;
 }
+
+.card {
+    width: 90vw;
+    background: #333;
+    border-radius: 8px;
+    height: 10vh;
+    margin: 3px;
+    display: flex;
+    align-items: center;
+    font-size: 14pt;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+.item {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.infos {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.btns {
+    margin-left: 0;
+}
