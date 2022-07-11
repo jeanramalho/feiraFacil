@@ -32,7 +32,7 @@ body {
 
 .cad {
     width: 90vw;
-    height: 10vh;
+    height: 14vh;
     background: #333;
     margin: 3px;
     border-radius: 8px;
@@ -40,4 +40,48 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 5px;
+}
+
+.cadInputs {
+    display: flex;
+    flex-direction: row;
+}
+
+.cadInput {
+    height: 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    background: #444;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12pt;
+    font-weight: 500;
+    text-align: center;
+    margin: 5px;
+}
+
+.cadQtd {
+    width: 70px;
+}
+
+.cadItem {
+    width: 20vw;
+}
+
+.cadPreco {
+    width: 100px;
+}
+
+.btn {
+    height: 35px;
+    margin: 5px;
+    width: 100px;
+    border-radius: 8px;
+    border: 1.5px solid #fff;
+    background: #555;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 14pt;
+    cursor: pointer;
 }
