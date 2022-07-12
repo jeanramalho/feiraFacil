@@ -126,11 +126,12 @@ function total () {
                 
                 var rows = res.rows
                 var total = rows[0]["SUM(valor)"]
-                var real = total.toLocaleString('pt-br', {minimumFractionDigits: 2})
+                var real = 0
 
                 if(rows[0]["SUM(valor)"] == null) {
                     output = `0,00`
                 } else {
+                    real = total.toLocaleString('pt-br', {minimumFractionDigits: 2})
                     output = `${real}`
                     
                 }
