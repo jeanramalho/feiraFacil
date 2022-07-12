@@ -120,7 +120,6 @@ body {
 }
 
 .icon {
-    color: #fff;
-    background-color: #fff;
-    width: 50px;
+    color: blue;
+    font-size: 14pt;
 }
