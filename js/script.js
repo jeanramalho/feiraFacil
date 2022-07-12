@@ -19,12 +19,16 @@ function save () {
     var qtd = document.getElementById('cad-qtd').value
     var item = document.getElementById('cad-item').value
     var preco = document.getElementById('cad-preco').value
+    var precoTotal = 0
 
-    db.transaction(function(tx){        
+    db.transaction(function(tx){   
+         
+        precoTotal = qtd * preco   
+        
         if(id) {
-            tx.executeSql('UPDATE feira SET item=?, quantidade=?, valor=? WHERE id=?', [item, qtd, preco, id], null)
+            tx.executeSql('UPDATE feira SET item=?, quantidade=?, valor=? WHERE id=?', [item, qtd, precoTotal, id], null)
         } else {
-            tx.executeSql('INSERT INTO feira (item, quantidade, valor) VALUES (?,?,?)', [item, qtd, preco])
+            tx.executeSql('INSERT INTO feira (item, quantidade, valor) VALUES (?,?,?)', [item, qtd, precoTotal])
         }
 
         show()
@@ -122,8 +126,7 @@ function total () {
                 output = `${rows[0]["SUM(valor)"]}`
                 valorTotal.innerHTML = output
             })
-        })
-    
+        }) 
     
 }
 
