@@ -22,7 +22,7 @@ function save () {
     var precoTotal = 0
 
     db.transaction(function(tx){   
-         
+
         precoTotal = qtd * preco   
         
         if(id) {
@@ -46,14 +46,17 @@ function show() {
         tx.executeSql('SELECT * FROM feira', [], function(tx, res) {
             var rows = res.rows
             var output = ''
+            valor = 0
 
             for(let i = 0; i < rows.length; i++) {
+                valor = rows[i].valor.toLocaleString('pt-br', {minimumFractionDigits: 2})
+
                 output += `
                 <div class="card">
                 <div class="item">
                 <div class="infos">
                     <span class="qtd">${rows[i].quantidade}</span> - <span class="item">${rows[i].item}</span>
-                    <p>R$<span class="valor">${rows[i].valor}</span> </p>
+                    <p>R$<span class="valor">${valor}</span> </p>
                 </div>
                 <div class="btns">
                     <button class="editar btn" onClick="update(${rows[i].id})"><i class="fa-solid fa-pencil icon"></i></button>
@@ -122,8 +125,16 @@ function total () {
             tx.executeSql('SELECT SUM(valor) FROM feira', [], function(tx, res){
                 
                 var rows = res.rows
-                
-                output = `${rows[0]["SUM(valor)"]}`
+                var total = rows[0]["SUM(valor)"]
+                var real = total.toLocaleString('pt-br', {minimumFractionDigits: 2})
+
+                if(rows[0]["SUM(valor)"] == null) {
+                    output = `0,00`
+                } else {
+                    output = `${real}`
+                    
+                }
+                                
                 valorTotal.innerHTML = output
             })
         }) 
