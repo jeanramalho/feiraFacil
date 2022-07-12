@@ -9,6 +9,7 @@ db.transaction(function(tx){
 function ready () {
     document.getElementById('save').addEventListener('click', save)
     show()
+    clean()
 }
 
 function save () {
@@ -26,6 +27,7 @@ function save () {
         }
 
         show()
+        clean()
             
     })
 
@@ -48,8 +50,8 @@ function show() {
                     <p>R$<span class="valor">${rows[i].valor}</span> </p>
                 </div>
                 <div class="btns">
-                    <button class="editar btn"><i class="fa-solid fa-pencil icon"></i></button>
-                    <button class="delete btn"><i class="fa-solid fa-trash-can icon"></i></button>
+                    <button class="editar btn" onClick="update(${rows[i].id})"><i class="fa-solid fa-pencil icon"></i></button>
+                    <button class="delete btn" onClick="del(${rows[i].id})"><i class="fa-solid fa-trash-can icon"></i></button>
                 </div>
                 </div>
                 </div>
@@ -60,4 +62,48 @@ function show() {
         })
     }, null)
 }
+
+function update (_id) {
+
+    var id =  document.getElementById('hidden-id')
+    var item =  document.getElementById('cad-item')
+    var qtd = document.getElementById('cad-qtd')
+    var preco = document.getElementById('cad-preco')
+
+    id.value = _id
+
+    db.transaction(function(tx){
+        tx.executeSql('SELECT * FROM feira WHERE id=?', [_id], function(tx, res){
+            var rows = res.rows[0]
+
+            item.value = rows.item
+            qtd.value = rows.quantidade
+            preco.value = rows.valor
+        })
+    })
+
+    show()
+    clean()
+}
+
+function del(_id) {
+
+    db.transaction(function(tx){
+        tx.executeSql('DELETE FROM feira WHERE id=?', [_id])
+    })
+    
+    show()
+    clean()
+}
+
+function clean () {
+    var item =  document.getElementById('cad-item')
+    var qtd = document.getElementById('cad-qtd')
+    var preco = document.getElementById('cad-preco')
+
+    item.value = ""
+    qtd.value = ""
+    preco.value = ""
+}
+
 
