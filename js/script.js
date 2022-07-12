@@ -10,6 +10,7 @@ function ready () {
     document.getElementById('save').addEventListener('click', save)
     show()
     clean()
+    total()
 }
 
 function save () {
@@ -28,6 +29,7 @@ function save () {
 
         show()
         clean()
+        total()
             
     })
 
@@ -84,6 +86,7 @@ function update (_id) {
 
     show()
     clean()
+    total()
 }
 
 function del(_id) {
@@ -94,6 +97,7 @@ function del(_id) {
     
     show()
     clean()
+    total()
 }
 
 function clean () {
@@ -104,6 +108,23 @@ function clean () {
     item.value = ""
     qtd.value = ""
     preco.value = ""
+}
+
+function total () {
+
+    var valorTotal = document.getElementById('total')
+
+        db.transaction(function (tx) {
+            tx.executeSql('SELECT SUM(valor) FROM feira', [], function(tx, res){
+                
+                var rows = res.rows
+                
+                output = `${rows[0]["SUM(valor)"]}`
+                valorTotal.innerHTML = output
+            })
+        })
+    
+    
 }
 
 
