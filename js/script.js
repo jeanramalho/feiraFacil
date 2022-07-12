@@ -8,22 +8,56 @@ db.transaction(function(tx){
 
 function ready () {
     document.getElementById('save').addEventListener('click', save)
+    show()
 }
 
 function save () {
-    var id = getElementById('hidden-id').value
-    var qtd = getElementById('cad-qtd').value
-    var item = getElementById('cad-item').value
-    var preco = getElementById('cad-preco').value
 
-    db.transaction(tx) {
+    var id = document.getElementById('hidden-id').value
+    var qtd = document.getElementById('cad-qtd').value
+    var item = document.getElementById('cad-item').value
+    var preco = document.getElementById('cad-preco').value
+
+    db.transaction(function(tx){        
         if(id) {
             tx.executeSql('UPDATE feira SET item=?, quantidade=?, valor=? WHERE id=?', [item, qtd, preco, id], null)
         } else {
-            tx.executeSql('INSER INTO feira (item, quantidade, valor) VALUES (?,?,?)', [item, qtd, preco])
+            tx.executeSql('INSERT INTO feira (item, quantidade, valor) VALUES (?,?,?)', [item, qtd, preco])
         }
 
         show()
-        clean()
-    }
+            
+    })
+
 }
+
+function show() {
+    var divItem = document.getElementById('divItem')
+
+    db.transaction(function(tx) {
+        tx.executeSql('SELECT * FROM feira', [], function(tx, res) {
+            var rows = res.rows
+            var output = ''
+
+            for(let i = 0; i < rows.length; i++) {
+                output += `
+                <div class="card">
+                <div class="item">
+                <div class="infos">
+                    <span class="qtd">${rows[i].quantidade}</span> - <span class="item">${rows[i].item}</span>
+                    <p>R$<span class="valor">${rows[i].valor}</span> </p>
+                </div>
+                <div class="btns">
+                    <button class="editar btn"><i class="fa-solid fa-pencil icon"></i></button>
+                    <button class="delete btn"><i class="fa-solid fa-trash-can icon"></i></button>
+                </div>
+                </div>
+                </div>
+                `
+            }
+
+            divItem.innerHTML = output
+        })
+    }, null)
+}
+
