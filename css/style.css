@@ -131,5 +131,17 @@ body {
         font-size: 1.5rem;
     }
 
+    .cadQtd {
+        width: 2rem;
+    }
+
+    .cadItem {
+        width: 11rem;
+    }
+
+    .cadPreco {
+        width: 3rem;
+    }
+
     
 }
