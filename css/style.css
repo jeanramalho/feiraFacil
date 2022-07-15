@@ -27,7 +27,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     text-align: center;
-    font-size: 5vh;
+    font-size: 2rem;
 }
 
 .cad {
@@ -122,4 +122,12 @@ body {
 .icon {
     color: #aaa;
     font-size: 14pt;
+}
+
+@media (max-width: 860px) {
+    .hTitulo {
+        font-size: 1.5rem;
+    }
+
+    
 }
