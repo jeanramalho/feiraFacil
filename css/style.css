@@ -143,5 +143,14 @@ body {
         width: 3rem;
     }
 
+    .btns {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .editar, .delete {
+        width: 2rem;
+    }
+
     
 }
