@@ -142,10 +142,13 @@ body {
     .cadPreco {
         width: 3rem;
     }
+    
+    .item {
+        justify-content: space-evenly;
+    }
 
-    .btns {
-        display: flex;
-        flex-direction: column;
+    .card {
+        justify-content: center;
     }
 
     .editar, .delete {
