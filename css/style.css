@@ -14,7 +14,7 @@ body {
 }
 
 .header {
-    height: 7vh;
+    height: 9vh;
     background: #333;
     padding: 5px;
     width: 90vw;
@@ -22,6 +22,9 @@ body {
     margin: 3px;
     align-items: center;
     justify-content: center;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .hTitulo {
@@ -29,12 +32,20 @@ body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     text-align: center;
+    font-size: 1.3rem;
+}
+
+.hTotal {
+    color: #4169E1;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 600;
+    text-align: center;
     font-size: 2rem;
 }
 
 .cad {
     width: 90vw;
-    height: 14vh;
+    height: 16vh;
     background: #333;
     margin: 3px;
     border-radius: 8px;
@@ -79,26 +90,40 @@ body {
     margin: 5px;
     width: 100px;
     border-radius: 8px;
-    border: 1.5px solid #fff;
-    background: #555;
-    color: #fff;
+    border: 1.5px solid #4169E1;
+    background: #444;
+    color: #4169E1;
     font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 14pt;
     cursor: pointer;
 }
 
 .card {
-    width: 90vw;
+    width: 91vw;
     background: #333;
     border-radius: 8px;
-    height: 10vh;
-    margin: 3px;
+    height: 15vh;
+    margin: 5px;
     display: flex;
     align-items: center;
     font-size: 14pt;
     color: #fff;
     font-family: 'Roboto', sans-serif;
+}
+
+
+.divItemm, .divQtd, .divPreco {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.desc {
+    font-size: 1rem;
+    color: #4169E1;
+    margin: 3px;
 }
 
 .item {
@@ -114,7 +139,7 @@ body {
     width: 60%;
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 .btns {
@@ -122,7 +147,7 @@ body {
 }
 
 .icon {
-    color: #aaa;
+    color: #4169E1;
     font-size: 14pt;
 }
 
@@ -133,6 +158,10 @@ body {
 
     .cadQtd {
         width: 2rem;
+    }
+
+    .card {
+        width: 93vw;
     }
 
     .cadItem {

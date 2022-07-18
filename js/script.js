@@ -55,8 +55,18 @@ function show() {
                 <div class="card">
                 <div class="item">
                 <div class="infos">
-                    <span class="qtd">${rows[i].quantidade}</span> - <span class="item">${rows[i].item}</span>
-                    <p>R$<span class="valor">${valor}</span> </p>
+                    <div class="divQtd">
+                        <h3 class="desc"> QTD </h3>
+                        <span class="qtd">${rows[i].quantidade}</span> 
+                    </div>
+                    <div class="divItemm">
+                        <h3 class="desc"> ITEM </h3>
+                        <span class="item">${rows[i].item}</span>
+                    </div>
+                    <div class="divPreco">
+                        <h3 class="desc"> VALOR </h3>
+                        <p>R$<span class="valor">${valor}</span> </p>
+                    </div>
                 </div>
                 <div class="btns">
                     <button class="editar btn" onClick="update(${rows[i].id})"><i class="fa-solid fa-pencil icon"></i></button>
