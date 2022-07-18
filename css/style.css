@@ -131,19 +131,24 @@ body {
     height: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
+    text-align: center;
 }
 
 .infos {
-    width: 60%;
+    width: 70%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .btns {
     margin-left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .icon {
@@ -181,7 +186,21 @@ body {
     }
 
     .editar, .delete {
-        width: 2rem;
+        width: 1.7rem;
+    }
+
+    .icon {
+        font-size: 12pt;
+    }
+
+    .infos {
+        width: 80%;
+    }
+
+    .btns {
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
     }
 
     
