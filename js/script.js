@@ -118,6 +118,7 @@ function del(_id) {
 }
 
 function clean () {
+    var id =  document.getElementById('hidden-id')
     var item =  document.getElementById('cad-item')
     var qtd = document.getElementById('cad-qtd')
     var preco = document.getElementById('cad-preco')
@@ -125,6 +126,7 @@ function clean () {
     item.value = ""
     qtd.value = ""
     preco.value = ""
+    id.value = ""
 }
 
 function total () {
