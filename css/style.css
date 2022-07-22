@@ -106,6 +106,7 @@ body {
     background: #333;
     border-radius: 8px;
     height: 15vh;
+    min-height: 90px;
     margin: 5px;
     display: flex;
     align-items: center;
