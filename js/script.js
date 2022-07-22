@@ -1,11 +1,15 @@
+//quando a janela e carregada é chamada a função ready
 window.addEventListener('load', ready)
 
+//recebe configurações do banco de dados
 var db = openDatabase('feiraFacil', '1.0', 'Feira Database', 2 * 1024 + 1024)
 
+//chama a as configurações e executa comando para criar tabela no banco
 db.transaction(function(tx){
     tx.executeSql('CREATE TABLE feira ( id INTEGER PRIMARY KEY, item TEXT, quantidade INTEGER, valor INTEGER)')
 })
 
+//função que é executada quando a página é carrega
 function ready () {
     document.getElementById('save').addEventListener('click', save)
     show()
@@ -13,6 +17,8 @@ function ready () {
     total()
 }
 
+//salva dados que estão nos inputs, serve para criar um novo cadastro 
+//ou atulizar um cadastro caso o id hidden esteja preenchido por um id válido
 function save () {
 
     var id = document.getElementById('hidden-id').value
@@ -39,6 +45,8 @@ function save () {
 
 }
 
+
+//exibe dados da tabela na tela
 function show() {
     var divItem = document.getElementById('divItem')
 
@@ -82,6 +90,7 @@ function show() {
     }, null)
 }
 
+//pega o id exibe os dados nos inputs
 function update (_id) {
 
     var id =  document.getElementById('hidden-id')
@@ -106,6 +115,8 @@ function update (_id) {
     total()
 }
 
+
+//deleta um item da tabela
 function del(_id) {
 
     db.transaction(function(tx){
@@ -117,6 +128,8 @@ function del(_id) {
     total()
 }
 
+
+//limpa os campos dos inputs
 function clean () {
     var id =  document.getElementById('hidden-id')
     var item =  document.getElementById('cad-item')
@@ -129,6 +142,8 @@ function clean () {
     id.value = ""
 }
 
+
+//soma todos os valores dos itens e exibe o valor total 
 function total () {
 
     var valorTotal = document.getElementById('total')
