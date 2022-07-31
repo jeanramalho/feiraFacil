@@ -5,12 +5,12 @@ window.addEventListener('load', ready)
 var db = openDatabase('feiraFacil', '1.0', 'Feira Database', 2 * 1024 + 1024)
 
 //chama a as configurações e executa comando para criar tabela no banco
-db.transaction(function(tx){
+db.transaction(function(tx) {
     tx.executeSql('CREATE TABLE feira ( id INTEGER PRIMARY KEY, item TEXT, quantidade INTEGER, valor INTEGER)')
 })
 
 //função que é executada quando a página é carrega
-function ready () {
+function ready() {
     document.getElementById('save').addEventListener('click', save)
     show()
     clean()
@@ -19,7 +19,7 @@ function ready () {
 
 //salva dados que estão nos inputs, serve para criar um novo cadastro 
 //ou atulizar um cadastro caso o id hidden esteja preenchido por um id válido
-function save () {
+function save() {
 
     var id = document.getElementById('hidden-id').value
     var qtd = document.getElementById('cad-qtd').value
@@ -27,11 +27,11 @@ function save () {
     var preco = document.getElementById('cad-preco').value
     var precoTotal = 0
 
-    db.transaction(function(tx){   
+    db.transaction(function(tx) {
 
-        precoTotal = qtd * preco   
-        
-        if(id) {
+        precoTotal = qtd * preco
+
+        if (id) {
             tx.executeSql('UPDATE feira SET item=?, quantidade=?, valor=? WHERE id=?', [item, qtd, precoTotal, id], null)
         } else {
             tx.executeSql('INSERT INTO feira (item, quantidade, valor) VALUES (?,?,?)', [item, qtd, precoTotal])
@@ -40,7 +40,7 @@ function save () {
         show()
         clean()
         total()
-            
+
     })
 
 }
@@ -56,8 +56,8 @@ function show() {
             var output = ''
             valor = 0
 
-            for(let i = 0; i < rows.length; i++) {
-                valor = rows[i].valor.toLocaleString('pt-br', {minimumFractionDigits: 2})
+            for (let i = 0; i < rows.length; i++) {
+                valor = rows[i].valor.toLocaleString('pt-br', { minimumFractionDigits: 2 })
 
                 output += `
                 <div class="card">
@@ -91,17 +91,17 @@ function show() {
 }
 
 //pega o id exibe os dados nos inputs
-function update (_id) {
+function update(_id) {
 
-    var id =  document.getElementById('hidden-id')
-    var item =  document.getElementById('cad-item')
+    var id = document.getElementById('hidden-id')
+    var item = document.getElementById('cad-item')
     var qtd = document.getElementById('cad-qtd')
     var preco = document.getElementById('cad-preco')
 
     id.value = _id
 
-    db.transaction(function(tx){
-        tx.executeSql('SELECT * FROM feira WHERE id=?', [_id], function(tx, res){
+    db.transaction(function(tx) {
+        tx.executeSql('SELECT * FROM feira WHERE id=?', [_id], function(tx, res) {
             var rows = res.rows[0]
 
             item.value = rows.item
@@ -119,10 +119,10 @@ function update (_id) {
 //deleta um item da tabela
 function del(_id) {
 
-    db.transaction(function(tx){
+    db.transaction(function(tx) {
         tx.executeSql('DELETE FROM feira WHERE id=?', [_id])
     })
-    
+
     show()
     clean()
     total()
@@ -130,9 +130,9 @@ function del(_id) {
 
 
 //limpa os campos dos inputs
-function clean () {
-    var id =  document.getElementById('hidden-id')
-    var item =  document.getElementById('cad-item')
+function cancel() {
+    var id = document.getElementById('hidden-id')
+    var item = document.getElementById('cad-item')
     var qtd = document.getElementById('cad-qtd')
     var preco = document.getElementById('cad-preco')
 
@@ -142,31 +142,40 @@ function clean () {
     id.value = ""
 }
 
+//limpa somente os campos de quantidade, preço e item
+function clean() {
+    var item = document.getElementById('cad-item')
+    var qtd = document.getElementById('cad-qtd')
+    var preco = document.getElementById('cad-preco')
 
-//soma todos os valores dos itens e exibe o valor total 
-function total () {
-
-    var valorTotal = document.getElementById('total')
-
-        db.transaction(function (tx) {
-            tx.executeSql('SELECT SUM(valor) FROM feira', [], function(tx, res){
-                
-                var rows = res.rows
-                var total = rows[0]["SUM(valor)"]
-                var real = 0
-
-                if(rows[0]["SUM(valor)"] == null) {
-                    output = `0,00`
-                } else {
-                    real = total.toLocaleString('pt-br', {minimumFractionDigits: 2})
-                    output = `${real}`
-                    
-                }
-                                
-                valorTotal.innerHTML = output
-            })
-        }) 
-    
+    item.value = ""
+    qtd.value = ""
+    preco.value = ""
 }
 
 
+//soma todos os valores dos itens e exibe o valor total 
+function total() {
+
+    var valorTotal = document.getElementById('total')
+
+    db.transaction(function(tx) {
+        tx.executeSql('SELECT SUM(valor) FROM feira', [], function(tx, res) {
+
+            var rows = res.rows
+            var total = rows[0]["SUM(valor)"]
+            var real = 0
+
+            if (rows[0]["SUM(valor)"] == null) {
+                output = `0,00`
+            } else {
+                real = total.toLocaleString('pt-br', { minimumFractionDigits: 2 })
+                output = `${real}`
+
+            }
+
+            valorTotal.innerHTML = output
+        })
+    })
+
+}
